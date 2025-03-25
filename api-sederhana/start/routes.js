@@ -3,9 +3,11 @@ const BarangController = use('App/Controllers/Http/BarangController')
 
 Route.get('/', ({ view }) => view.render('welcome'))
 
-Route.get('/barangs', 'BarangController.index') // Menampilkan semua barang
-Route.get('/barangs/:id', 'BarangController.show') // Menampilkan satu barang
-Route.post('/barangs', 'BarangController.store') // Menambahkan barang baru
-Route.put('/barangs/:id', 'BarangController.update') // Update barang
-Route.delete('/barangs/:id', 'BarangController.destroy') // Hapus barang
+Route.get('/barangs', 'BarangController.index')
+Route.get('/barangs/:id', 'BarangController.show')
+Route.get('/barangs/:id/edit', 'BarangController.edit')
+Route.post('/barangs', 'BarangController.store')
+Route.put('/barangs/:id', 'BarangController.update')
+Route.delete('/barangs/:id', 'BarangController.destroy')
+
 

@@ -1,53 +1,45 @@
 const Barang = use('App/Models/Barang')
 
 class BarangController {
-    async index({ view }) {
-        const barangs = await Barang.all()
-        return view.render('barangs.index', { barangs: barangs.toJSON() })
-    }
+  async index({ view }) {
+    const barangs = await Barang.all()
+    return view.render('barangs.index', { barangs: barangs.toJSON() })
+  }
 
-    async show({ params, view }) {
-        const barang = await Barang.find(params.id)
-        return view.render('barangs.show', { barang })
-    }
+  async show({ params, view }) {
+    const barang = await Barang.find(params.id)
+    return view.render('barangs.show', { barang })
+  }
 
-    async store({ request, response }) {
-        const { nama, harga, stok } = request.only(['nama', 'harga', 'stok'])
-        const barang = new Barang()
-        barang.nama = nama
-        barang.harga = harga
-        barang.stok = stok
-        await barang.save()
-        return response.redirect('/barangs')
-    }
+  async store({ request, response, session }) {
+    const data = request.only(['nama', 'harga', 'stok'])
+    await Barang.create(data)
 
-    // **Mengupdate barang berdasarkan ID**
-    async update({ params, request, response }) {
-        const barang = await Barang.find(params.id)
-        if (!barang) {
-        return response.status(404).json({ message: 'Barang tidak ditemukan' })
-        }
+    session.flash({ success: 'Barang berhasil ditambahkan!' })
+    return response.redirect('/barangs')
+  }
 
-        const { nama, harga, stok } = request.only(['nama', 'harga', 'stok'])
-        barang.nama = nama || barang.nama
-        barang.harga = harga || barang.harga
-        barang.stok = stok || barang.stok
-        await barang.save()
+  async edit({ params, view }) {
+    const barang = await Barang.find(params.id)
+    return view.render('barangs.edit', { barang })
+  }
 
-        return response.json({ message: 'Barang berhasil diperbarui', data: barang })
-    }
-    
-    // **Menghapus barang berdasarkan ID**
-    async destroy({ params, response }) {
-        const barang = await Barang.find(params.id)
-        if (!barang) {
-        return response.status(404).json({ message: 'Barang tidak ditemukan' })
-        }
+  async update({ params, request, response, session }) {
+    const barang = await Barang.find(params.id)
+    barang.merge(request.only(['nama', 'harga', 'stok']))
+    await barang.save()
 
-        await barang.delete()
-        return response.json({ message: 'Barang berhasil dihapus' })
-    }
-    
+    session.flash({ success: 'Barang berhasil diperbarui!' })
+    return response.redirect('/barangs')
+  }
+
+  async destroy({ params, response, session }) {
+    const barang = await Barang.find(params.id)
+    await barang.delete()
+
+    session.flash({ success: 'Barang berhasil dihapus!' })
+    return response.redirect('/barangs')
+  }
 }
 
 module.exports = BarangController

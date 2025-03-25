@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Barang</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Edit Barang</h2>
+    <form action="/barangs/{{ barang.id }}" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="text" name="nama" value="{{ barang.nama }}" required>
+        <input type="number" name="harga" value="{{ barang.harga }}" required>
+        <input type="number" name="stok" value="{{ barang.stok }}" required>
+        <button type="submit">Simpan Perubahan</button>
+    </form>
+    <a href="/barangs">Batal</a>
+</body>
+</html>
