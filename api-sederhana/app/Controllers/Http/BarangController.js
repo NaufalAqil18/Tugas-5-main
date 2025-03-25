@@ -20,6 +20,20 @@ class BarangController {
         await barang.save()
         return response.redirect('/barangs')
     }
+
+    async update({ params, request, response }) {
+        const barang = await Barang.find(params.id)
+        barang.merge(request.only(['nama', 'harga', 'stok']))
+        await barang.save()
+        return response.redirect('/barangs')
+    }
+    
+    async destroy({ params, response }) {
+        const barang = await Barang.find(params.id)
+        await barang.delete()
+        return response.redirect('/barangs')
+    }
+    
 }
 
 module.exports = BarangController
