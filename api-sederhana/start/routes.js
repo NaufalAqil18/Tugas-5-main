@@ -1,4 +1,5 @@
 const Route = use('Route')
+const BarangController = use('App/Controllers/Http/BarangController')
 
 Route.get('/', ({ view }) => view.render('welcome'))
 
