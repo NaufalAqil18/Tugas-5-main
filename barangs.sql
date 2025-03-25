@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `api_sederhana`
+-- Database: `project_api`
 --
 
 -- --------------------------------------------------------
@@ -27,14 +27,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `barangs`
 --
 
-CREATE TABLE `barangs` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `barangs` (
+  `id` int(10) UNSIGNED NOT NULL PRIMARY KEY,
   `nama` varchar(255) NOT NULL,
   `harga` int(11) NOT NULL,
   `stok` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 --
 -- Dumping data for table `barangs`
@@ -54,8 +54,6 @@ INSERT INTO `barangs` (`id`, `nama`, `harga`, `stok`, `created_at`, `updated_at`
 --
 -- Indexes for table `barangs`
 --
-ALTER TABLE `barangs`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
