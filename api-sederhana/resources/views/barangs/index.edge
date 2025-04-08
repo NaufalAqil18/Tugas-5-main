@@ -5,14 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Barang</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
-        table { width: 80%; margin: auto; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 8px; }
-        th { background-color: #f4f4f4; }
-        input, button { margin: 10px; padding: 8px; }
-        .actions { display: flex; justify-content: center; gap: 10px; }
-        .delete-button { color: white; background-color: red; border: none; padding: 5px 10px; cursor: pointer; }
-        .edit-button { color: white; background-color: green; border: none; padding: 5px 10px; cursor: pointer; }
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        thead {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9f7ef;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .edit-button,
+        .delete-button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .edit-button {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .edit-button:hover {
+            background-color: #2980b9;
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        form[method="POST"] {
+            margin: 0;
+        }
+
+        form[action="/barangs"] {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 10px;
+            width: 200px;
+            margin: 8px 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #27ae60;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+
+            input[type="text"],
+            input[type="number"] {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -36,7 +155,7 @@
                     <td>{{ barang.stok }}</td>
                     <td class="actions">
                         <a href="/barangs/{{ barang.id }}/edit" class="edit-button">Edit</a>
-                        <form action="/barangs/{{ barang.id }}" method="POST" style="display: inline;">
+                        <form action="/barangs/{{ barang.id }}" method="POST" style="display:inline;">
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="delete-button" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                         </form>
