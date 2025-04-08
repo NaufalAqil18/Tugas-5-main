@@ -156,6 +156,7 @@
                     <td class="actions">
                         <a href="/barangs/{{ barang.id }}/edit" class="edit-button">Edit</a>
                         <form action="/barangs/{{ barang.id }}" method="POST" style="display:inline;">
+                            {{ csrfField() }}
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="delete-button" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                         </form>
@@ -167,6 +168,7 @@
 
     <h2>Tambah Barang</h2>
     <form action="/barangs" method="POST">
+        {{ csrfField() }}
         <input type="text" name="nama" placeholder="Nama Barang" required>
         <input type="number" name="harga" placeholder="Harga" required>
         <input type="number" name="stok" placeholder="Stok" required>

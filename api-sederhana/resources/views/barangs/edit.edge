@@ -92,6 +92,7 @@
     <h2>Edit Barang</h2>
     <div class="form-container">
         <form action="/barangs/{{ barang.id }}" method="POST">
+            {{ csrfField() }}
             <input type="hidden" name="_method" value="PUT">
             <input type="text" name="nama" value="{{ barang.nama }}" placeholder="Nama Barang" required>
             <input type="number" name="harga" value="{{ barang.harga }}" placeholder="Harga" required>
