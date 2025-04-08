@@ -5,18 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Barang</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            width: 90%;
+            max-width: 500px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #219150;
+        }
+
+        .cancel-button {
+            margin-top: 15px;
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #7f8c8d;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cancel-button:hover {
+            background-color: #636e72;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            input,
+            button {
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
 <body>
     <h2>Edit Barang</h2>
-    <form action="/barangs/{{ barang.id }}" method="POST">
-        <input type="hidden" name="_method" value="PUT">
-        <input type="text" name="nama" value="{{ barang.nama }}" required>
-        <input type="number" name="harga" value="{{ barang.harga }}" required>
-        <input type="number" name="stok" value="{{ barang.stok }}" required>
-        <button type="submit">Simpan Perubahan</button>
-    </form>
-    <a href="/barangs">Batal</a>
+    <div class="form-container">
+        <form action="/barangs/{{ barang.id }}" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="text" name="nama" value="{{ barang.nama }}" placeholder="Nama Barang" required>
+            <input type="number" name="harga" value="{{ barang.harga }}" placeholder="Harga" required>
+            <input type="number" name="stok" value="{{ barang.stok }}" placeholder="Stok" required>
+            <button type="submit">Simpan Perubahan</button>
+        </form>
+        <a href="/barangs" class="cancel-button">Batal</a>
+    </div>
 </body>
 </html>
