@@ -26,10 +26,26 @@ class BarangController {
 
   async update({ params, request, response, session }) {
     const barang = await Barang.find(params.id)
-    barang.merge(request.only(['nama', 'harga', 'stok']))
-    await barang.save()
-
-    session.flash({ success: 'Barang berhasil diperbarui!' })
+    if (!barang) {
+      session.flash({ error: 'Barang tidak ditemukan!' })
+      return response.redirect('/barangs')
+    }
+    
+    const data = request.only(['nama', 'harga', 'stok'])
+    console.log('ID Barang:', params.id)
+    console.log('Data yang akan diupdate:', data)
+    
+    try {
+      barang.merge(data)
+      await barang.save()
+      console.log('Barang setelah update:', barang.toJSON())
+      
+      session.flash({ success: 'Barang berhasil diperbarui!' })
+    } catch (error) {
+      console.error('Error saat update:', error)
+      session.flash({ error: 'Gagal memperbarui barang!' })
+    }
+    
     return response.redirect('/barangs')
   }
 

@@ -7,7 +7,7 @@ Route.get('/barangs', 'BarangController.index')
 Route.get('/barangs/:id', 'BarangController.show')
 Route.get('/barangs/:id/edit', 'BarangController.edit')
 Route.post('/barangs', 'BarangController.store')
-Route.put('/barangs/:id', 'BarangController.update')
+Route.post('/barangs/:id', 'BarangController.update')
 Route.post('/barangs/:id', 'BarangController.destroy')
 
 
